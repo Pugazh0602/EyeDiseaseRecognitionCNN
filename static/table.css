@@ -1,0 +1,19 @@
+table {
+    width: revert;
+    color:white;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #573030;
+}
+
+th {
+    cursor: pointer;
+}
+
+th:hover {
+    background-color: #db6767;
+}

@@ -1,0 +1,27 @@
+Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ densenet121 (Functional)    (None, 7, 7, 1024)        7037504   
+                                                                 
+ max_pooling2d               (None, 3, 3, 1024)       0
+ (MaxPooling2D)
+                                                                 
+ batch_normalization         (None, 3, 3, 1024)       4096      
+ (BatchNormalization)  
+                                                                 
+ dropout (Dropout)           (None, 3, 3, 1024)        0         
+                                                                 
+ flatten (Flatten)           (None, 9216)              0         
+                                                                 
+ dense (Dense)               (None, 512)               4719104   
+                                                                 
+ dropout_1 (Dropout)         (None, 512)               0         
+                                                                 
+ dense_1 (Dense)             (None, 4)                 2052      
+                                                                 
+=================================================================
+Total params: 11,762,756
+Trainable params: 10,611,268
+Non-trainable params: 1,151,488
+_________________________________________________________________

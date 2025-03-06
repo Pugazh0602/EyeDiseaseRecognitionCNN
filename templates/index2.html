@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Eye Diseases Perdiction</title>
+        <link rel='stylesheet' href='/static/boxicons.min.css'/>
+        <link rel="stylesheet" href='/static/styles.css'/>
+        <link rel="stylesheet" href='/static/table.css'/>
+        <link rel="stylesheet" href="/static/all.min.css"/>
+        <script src="/static/table.js"></script>
+    </head>
+    <body>
+        <nav>
+            <img src="/static/eye.gif" class="logo">
+        </nav>
+        <div class='.bx-subdirectory-right'></div>
+        <div class="hero">
+            <div class="detel">
+                <h1>
+                    EYE Disease<span>Recognition</span>
+                </h1>
+                <p>Introduction. Early ocular disease detection
+                is an economic and effective way to prevent
+                blindness caused by diabetes, glaucoma, cataract,
+                age-related macular degeneration (AMD),
+                and many other diseases
+            </p>
+                <br>
+                {% if readImg == '1' %}
+            <p>Diagnosis is : {{diseases}}</p>
+                <br>
+                <table id="probabilitiesTable">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable(0)">Ocular Disease</th>
+                            <th onclick="sortTable(1)">Probability</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Glaucoma</td>
+                            <td>{{prob[2]}}%</td>
+                        </tr>
+                        <tr>
+                            <td>Cataract</td>
+                            <td>{{prob[0]}}%</td>
+                        </tr>
+                        <tr>
+                            <td>Normal</td>
+                            <td>{{prob[3]}}%</td>
+                        </tr>
+                        <tr>
+                            <td>Diabetic Retinopathy</td>
+                            <td>{{prob[1]}}%</td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% endif %}
+        
+            </div>
+            <div class="images" style="display: flex;">
+                <div class="container" style="  margin-left: 30%;">
+                    <div class="img-area" data-img="">
+                        <i class='bx bxs-cloud-upload icon'></i>
+                        {% if readImg == '1' %}
+                    <img class='newImg' src="{{ user_image }}" alt="User Image" class="img-thumbnail" style="width:300px;height:300px;">
+                        {% endif %}
+                    <h3>Upload Image</h3>
+                        <p>
+                            Image size must be less than <span>2MB</span>
+                        </p>
+                    </div>
+                    <button class="select-image">Select Image</button>
+                    <center>
+                        <form id="subf" class="form-inline" action="/" method="post" enctype="multipart/form-data">
+                            <input name="filename" type="file" id="file" accept="image/*" hidden>
+                            <button class="select-image" style="margin-top: 20px; background-color: rgb(55, 55, 55);">
+                                <input type="submit" class="btn btn-success " value="Predict" hidden>Predict
+                            </button>	
+                        </form>
+                    </center>
+                </div>
+            </div>
+        </div>
+        <script src="/static/script.js"></script>
+    </body>
+</html>

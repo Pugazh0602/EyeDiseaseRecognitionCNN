@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probabilities</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #573030;
+        }
+
+        th {
+            cursor: pointer;
+        }
+
+        th:hover {
+            background-color: #db6767;
+        }
+    </style>
+</head>
+<body>
+    <h2>Probabilities</h2>
+
+    <table id="probabilitiesTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">Ocular Disease</th>
+                <th onclick="sortTable(1)">Probability</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Glaucoma</td>
+                <td>0.05</td>
+            </tr>
+            <tr>
+                <td>Cataract</td>
+                <td>0.1</td>
+            </tr>
+            <tr>
+                <td>Macular Degeneration</td>
+                <td>0.15</td>
+            </tr>
+            <tr>
+                <td>Diabetic Retinopathy</td>
+                <td>0.2</td>
+            </tr>
+            <tr>
+                <td>Conjunctivitis</td>
+                <td>0.3</td>
+            </tr>
+            <tr>
+                <td>Retinal Detachment</td>
+                <td>0.01</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function sortTable(columnIndex) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("probabilitiesTable");
+            switching = true;
+            dir = "asc"; // Set the sorting direction to ascending
+
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[columnIndex];
+                    y = rows[i + 1].getElementsByTagName("TD")[columnIndex];
+
+                    if (dir === "asc") {
+                        if (columnIndex === 1) {
+                            if (parseFloat(x.innerHTML) > parseFloat(y.innerHTML)) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        } else {
+                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        }
+                    } else if (dir === "desc") {
+                        if (columnIndex === 1) {
+                            if (parseFloat(x.innerHTML) < parseFloat(y.innerHTML)) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        } else {
+                            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount++;
+                } else {
+                    if (switchcount === 0 && dir === "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
