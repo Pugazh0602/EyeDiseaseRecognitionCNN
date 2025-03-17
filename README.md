@@ -1,4 +1,3 @@
-```markdown
 # Ocular Disease Recognition Web Application
 
 This project implements a web application for automated ocular disease recognition using Convolutional Neural Networks (CNNs). The application allows users to upload an eye image, which is then processed by a pre-trained model to predict the presence of various ocular diseases, including Cataract, Glaucoma, Diabetic Retinopathy, and Normal.
@@ -6,7 +5,6 @@ This project implements a web application for automated ocular disease recogniti
 ## Project Structure
 
 ```
-.
 ├── README.md               # This file
 ├── __pycache__            # Python cache directory (generated)
 │   └── app.cpython-312.pyc # Compiled Python file
@@ -117,4 +115,3 @@ Contributions to this project are welcome.  Please fork the repository and submi
 ## License
 
 [Specify the license under which this project is released. For example, MIT License.]
-```
