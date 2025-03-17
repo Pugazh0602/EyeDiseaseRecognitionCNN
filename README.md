@@ -64,7 +64,7 @@ The `final_model.h5` file contains the pre-trained model. The architecture is su
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/Pugazh0602/EyeDiseaseRecognitionCNN
+    git clone https://github.com/Pugazh0602/EyeDiseaseRecognitionCNN.git
     cd EyeDiseaseRecognitionCNN
     ```
 

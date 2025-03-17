@@ -214,172 +214,26 @@ for layer in dense.layers[:121]:
 ```
 
 ```python
-# # old
-# model = Sequential()
-# model.add(dense)
-# model.add(Conv2D(1024, (3, 3), activation='relu', padding='same'))
-# model.add(MaxPooling2D((2, 2), strides=(1, 1)))
-# model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
-# model.add(MaxPooling2D((2, 2), strides=(1, 1)))
-# model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
-# model.add(MaxPooling2D((2, 2), strides=(1, 1)))
-# model.add(Conv2D(256, (3, 3), activation='relu', padding='same'))
-# model.add(MaxPooling2D((2, 2), strides=(1, 1)))
-# model.add(Conv2D(128, (3, 3), activation='relu', padding='same'))
-# model.add(MaxPooling2D((2, 2), strides=(1, 1)))
-# model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
-# model.add(MaxPooling2D((2, 2), strides=(1, 1)))
-# model.add(BatchNormalization())
-# model.add(GlobalAveragePooling2D())
-# model.add(Flatten())
-# model.add(Dense(512, activation='relu'))
-# model.add(Dropout(0.5))
-# model.add(Dense(4, activation='softmax'))
-```
-
-```python
 # from keras.utils.vis_utils import plot_model
 
 # plot_model(model, to_file='model_plot.png', show_shapes=True, show_layer_names=True)
 ```
 
 ```python
-# # this is it
-# model = Sequential()
-# model.add(dense)
-# model.add(MaxPooling2D())
-# model.add(BatchNormalization())
-# model.add(Dropout(0.5))
+model = Sequential()
+model.add(dense)
+model.add(MaxPooling2D())
+model.add(BatchNormalization())
+model.add(Dropout(0.5))
 
-# model.add(Flatten())
-# model.add(Dense(512,activation= "relu"))
-# model.add(Dropout(0.5))
-# model.add(Dense(4, activation = "sigmoid"))
+model.add(Flatten())
+model.add(Dense(512,activation= "relu"))
+model.add(Dropout(0.5))
+model.add(Dense(4, activation = "sigmoid"))
 ```
 
 ```python
-# # 1
-# x = dense.output
-
-# x = Conv2D(512, (3, 3), activation='relu', padding='same')(x)
-# x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-# x = Conv2D(512, (3, 3), activation='relu', padding='same')(x)
-# x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-# x = Conv2D(256, (3, 3), activation='relu', padding='same')(x)
-# x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-# x = Conv2D(128, (3, 3), activation='relu', padding='same')(x)
-# x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-
-# x = GlobalAveragePooling2D()(x)
-# x = Flatten()(x)
-# x = Dense(512,activation= "relu")(x)
-# x = Dropout(0.5)(x)
-# pred = Dense(4, activation='softmax')(x)
-
-# model = Model(inputs=dense.input, outputs=pred)
-
-# model.compile(optimizer='adamax', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-```
-
-```python
-# 2
-x = dense.output
-
-x = Conv2D(256, (3, 3), activation='relu', padding='same')(x)
-x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-x = Conv2D(256, (3, 3), activation='relu', padding='same')(x)
-x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-x = Conv2D(128, (3, 3), activation='relu', padding='same')(x)
-x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-
-x = GlobalAveragePooling2D()(x)
-x = Flatten()(x)
-x = Dense(512,activation= "relu")(x)
-x = Dropout(0.5)(x)
-pred = Dense(4, activation='softmax')(x)
-
-model = Model(inputs=dense.input, outputs=pred)
-
 model.compile(optimizer='adamax', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-```
-
-```python
-# # 3
-# x = dense.output
-
-# x = Conv2D(1024, (3, 3), activation='relu', padding='same')(x)
-# x = MaxPooling2D((2, 2, strides=(1, 1))(x)
-# x = Conv2D(1024, (3, 3), activation='relu', padding='same')(x)
-# x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-# x = Conv2D(512, (3, 3), activation='relu', padding='same')(x)
-# x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-# x = Conv2D(512, (3, 3), activation='relu', padding='same')(x)
-# x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-# x = Conv2D(256, (3, 3), activation='relu', padding='same')(x)
-# x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-# x = Conv2D(128, (3, 3), activation='relu', padding='same')(x)
-# x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-
-# x = GlobalAveragePooling2D()(x)
-# x = Flatten()(x)
-# x = Dense(512,activation= "relu")(x)
-# x = Dropout(0.5)(x)
-# pred = Dense(4, activation='softmax')(x)
-
-# model = Model(inputs=dense.input, outputs=pred)
-
-# model.compile(optimizer='adamax', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-```
-
-```python
-# # 4
-# x = dense.output
-
-# x = Conv2D(512, (3, 3), activation='relu', padding='same')(x)
-# x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-# x = Conv2D(256, (3, 3), activation='relu', padding='same')(x)
-# x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-# x = Conv2D(128, (3, 3), activation='relu', padding='same')(x)
-# x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-
-# x = GlobalAveragePooling2D()(x)
-# x = Flatten()(x)
-# x = Dense(512,activation= "relu")(x)
-# x = Dropout(0.5)(x)
-# pred = Dense(4, activation='softmax')(x)
-
-# model = Model(inputs=dense.input, outputs=pred)
-
-# model.compile(optimizer='adamax', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-```
-
-```python
-# # 5
-# x = dense.output
-
-# x = Conv2D(1024, (3, 3), activation='relu', padding='same')(x)
-# x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-# x = Conv2D(512, (3, 3), activation='relu', padding='same')(x)
-# x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-# x = Conv2D(512, (3, 3), activation='relu', padding='same')(x)
-# x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-# x = Conv2D(256, (3, 3), activation='relu', padding='same')(x)
-# x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-# x = Conv2D(128, (3, 3), activation='relu', padding='same')(x)
-# x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-# x = Conv2D(64, (3, 3), activation='relu', padding='same')(x)
-# x = MaxPooling2D((2, 2), strides=(1, 1))(x)
-
-# x = BatchNormalization()(x)
-# x = GlobalAveragePooling2D()(x)
-# x = Flatten()(x)
-# x = Dense(512,activation= "relu")(x)
-# x = Dropout(0.5)(x)
-# pred = Dense(4, activation='softmax')(x)
-
-# model = Model(inputs=dense.input, outputs=pred)
-
-# model.compile(optimizer='adamax', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 ```
 
 ```python
