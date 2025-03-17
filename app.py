@@ -12,7 +12,7 @@ from tensorflow.keras.utils import load_img, img_to_array  # For image preproces
 app = Flask(__name__)
 
 # Load the pre-trained model (ensure the path is correct for your environment)
-model = load_model('models/final_model.h5')
+model = load_model('model/final_model.h5')
 
 # Define the path to store uploaded images
 target_img = os.path.join(os.getcwd(), 'static/images')
