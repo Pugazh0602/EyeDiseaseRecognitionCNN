@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Switch - Pico.css</title>
+    <!-- Pico.css CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <style>
+        /* Optional: Smooth transition for manual theme switch */
+        html, [class] {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <button id="themeSwitch" class="btn">Toggle Theme</button>
+        
+        <article class="card">
+            <h1>Theme Demo</h1>
+            <p>
+                This page uses Pico.css with built-in theme switching. 
+                It automatically adapts to your system preferences and 
+                can be manually toggled.
+            </p>
+        </article>
+    </main>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Check initial theme from localStorage or system preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                $('html').attr('data-theme', savedTheme);
+            }
+
+            // Toggle theme on button click
+            $('#themeSwitch').click(function() {
+                const currentTheme = $('html').attr('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                $('html').attr('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+        });
+    </script>
+</body>
+</html>
