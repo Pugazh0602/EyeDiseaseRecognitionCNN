@@ -24,7 +24,7 @@ def predict():
             labs = ['Cataract', 'Glaucoma', 'Diabetic Retinopathy', 'Normal']
             return render_template(INDEX_FILE, 
                                    readImg=True, 
-                                   diseases="Diabetic Retinopathy", 
+                                   disease="Diabetic Retinopathy", 
                                    prob=pred, 
                                    user_image=file_path, 
                                    label=labs)
