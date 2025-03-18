@@ -3,13 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eye Diseases Prediction</title>
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/libs/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/static/libs/boxicons/2.1.4/css/boxicons.min.css">
-    <script src="/static/js/table.js"></script>
+    <link rel="stylesheet" href="/static/css/styles.css">
     <style>
         /* Dark Mode Styles */
         body.dark-mode {
@@ -37,12 +36,15 @@
 
         /* Custom Styles */
         body {
-            font-family: sans-serif; /* Consider overriding Bootstrap font more explicitly if needed */
+            font-family: sans-serif;
+            /* Consider overriding Bootstrap font more explicitly if needed */
         }
 
         .navbar-brand img {
-            height: 40px; /* Match height in the original */
-            margin-right: 10px; /* Add some spacing */
+            height: 40px;
+            /* Match height in the original */
+            margin-right: 10px;
+            /* Add some spacing */
         }
 
         .navbar-brand span {
@@ -81,14 +83,26 @@
             cursor: pointer;
         }
 
-        #file {
+        #inputFile {
             height: 224px;
             width: 224px;
         }
 
         .image-upload-container {
-            text-align: center; /* Centers the content within the container */
+            text-align: center;
+            /* Centers the content within the container */
             margin-top: 10px;
+        }
+
+        .upload-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .upload-container>div {
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -98,7 +112,7 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <img src="/static/img/eye.gif" alt="Logo" class="d-inline-block align-top">
-                EYE Disease <span class="">Recognition</span>
+                EYE Disease <span>Recognition</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,7 +124,8 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav ms-auto"> <!--  Align the toggle button to the right -->
+                <ul class="navbar-nav ms-auto">
+                    <!--  Align the toggle button to the right -->
                     <li class="nav-item">
                         <a href="#" id="theme-toggle" class="nav-link">
                             <i class="bi bi-sun-fill"></i>
@@ -120,77 +135,73 @@
             </div>
         </div>
     </nav>
-    <div>
+    <div class="container">
         <!-- Intro para -->
-        <div class="mt-3">
+        <section id="intro" class="mt-3">
             <h3>Intro</h3>
-            <p>Early ocular disease detection
-                is an economic and effective way to prevent
+            <p>Early ocular disease detection is an economic and effective way to prevent
                 blindness caused by diabetes, glaucoma, cataract,
                 age-related macular degeneration (AMD),
-                and many other diseases
+                and many other diseases.
             </p>
             <br>
-        </div>
+        </section>
 
         <!-- Image Upload UI -->
-        <div>
-            <div>
-                <div data-img="" onclick="fileInput.click()">
+        <section id="upload">
+            <div class="upload-container">
+                <div class="img-area" data-img="" onclick="document.getElementById('inputFile').click()">
                     <i class='bx bxs-cloud-upload icon'></i>
                     {% if readImg %}
-                        <img class='newImg' src="{{ user_image }}" alt="User Image" class="img-thumbnail">
+                    <img class='newImg' src="{{ user_image }}" alt="User Image" class="img-thumbnail">
                     {% else %}
-                        <h3>Upload Image</h3>
-                        <p>
-                            Image size must be less than <span>2MB</span>
-                        </p>
+                    <h3>Upload Image</h3>
+                    <p>
+                        Image size must be less than <span>2MB</span>
+                    </p>
                     {% endif %}
                 </div>
                 <div>
-                		<button type="button">Select Image</button>
-                		<div>
-                  			<form id="subf" class="form-inline" action="/" method="post" enctype="multipart/form-data">
-                        		<input name="filename" type="file" id="file" accept="image/*" hidden>
-                        		<button type="submit">Predict</button>
-                    		</form>
-                    </div>
+                    <form id="subf" class="form-inline" action="/" method="post" enctype="multipart/form-data">
+                        <input name="filename" type="file" id="inputFile" accept="image/*" hidden>
+                        <button type="submit" class="btn btn-primary">Predict</button>
+                    </form>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- After image uploaded -->
         {% if readImg %}
-            <div class="mt-3">
-                <h3>Diagnosis is : {{diseases}}</h3>
-                <br>
-                <table id="probabilitiesTable" class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th onclick="sortTable(0)">Ocular Disease</th>
-                            <th onclick="sortTable(1)">Probability</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Glaucoma</td>
-                            <td>{{prob[2]}}%</td>
-                        </tr>
-                        <tr>
-                            <td>Cataract</td>
-                            <td>{{prob[0]}}%</td>
-                        </tr>
-                        <tr>
-                            <td>Normal</td>
-                            <td>{{prob[3]}}%</td>
-                        </tr>
-                        <tr>
-                            <td>Diabetic Retinopathy</td>
-                            <td>{{prob[1]}}%</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <section id="results" class="mt-3">
+            <h3>Diagnosis is : {{diseases}}</h3>
+            <br>
+            <table id="probabilitiesTable" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0)">Ocular Disease</th>
+                        <th onclick="sortTable(1)">Probability</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Glaucoma</td>
+                        <td>{{prob[2]}}%</td>
+                    </tr>
+                    <tr>
+                        <td>Cataract</td>
+                        <td>{{prob[0]}}%</td>
+                    </tr>
+                    <tr>
+                        <td>Normal</td>
+                        <td>{{prob[3]}}%</td>
+                    </tr>
+                    <tr>
+                        <td>Diabetic Retinopathy</td>
+                        <td>{{prob[1]}}%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
         {% endif %}
 
     </div>
@@ -199,8 +210,6 @@
     <script>
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
-        const selectImageBtn = document.querySelector('.select-image');
-        const fileInput = document.getElementById('file');
 
         // Function to set the theme based on localStorage
         function setTheme() {
@@ -227,10 +236,6 @@
                 themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
                 localStorage.setItem('theme', 'dark');
             }
-        });
-
-        selectImageBtn.addEventListener('click', () => {
-            fileInput.click();
         });
     </script>
 </body>

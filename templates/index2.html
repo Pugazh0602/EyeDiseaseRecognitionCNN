@@ -37,12 +37,15 @@
 
         /* Custom Styles */
         body {
-            font-family: sans-serif; /* Consider overriding Bootstrap font more explicitly if needed */
+            font-family: sans-serif;
+            /* Consider overriding Bootstrap font more explicitly if needed */
         }
 
         .navbar-brand img {
-            height: 40px; /* Match height in the original */
-            margin-right: 10px; /* Add some spacing */
+            height: 40px;
+            /* Match height in the original */
+            margin-right: 10px;
+            /* Add some spacing */
         }
 
         .navbar-brand span {
@@ -87,7 +90,8 @@
         }
 
         .image-upload-container {
-            text-align: center; /* Centers the content within the container */
+            text-align: center;
+            /* Centers the content within the container */
             margin-top: 10px;
         }
     </style>
@@ -110,7 +114,8 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav ms-auto"> <!--  Align the toggle button to the right -->
+                <ul class="navbar-nav ms-auto">
+                    <!-- Align the toggle button to the right -->
                     <li class="nav-item">
                         <a href="#" id="theme-toggle" class="nav-link">
                             <i class="bi bi-sun-fill"></i>
@@ -120,7 +125,7 @@
             </div>
         </div>
     </nav>
-    <div>
+    <div class="container">
         <!-- Intro para -->
         <div class="mt-3">
             <h3>Intro</h3>
@@ -134,26 +139,26 @@
         </div>
 
         <!-- Image Upload UI -->
-        <div>
-            <div>
-                <div data-img="" onclick="fileInput.click()">
-                    <i class='bx bxs-cloud-upload icon'></i>
-                    {% if readImg %}
-                        <img class='newImg' src="{{ user_image }}" alt="User Image" class="img-thumbnail">
-                    {% else %}
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="image-upload-container">
+                    <div class="img-area" data-img="" onclick="fileInput.click()">
+                        <i class='bx bxs-cloud-upload icon'></i>
+                        {% if readImg %}
+                        <img class='newImg img-fluid' src="{{ user_image }}" alt="User Image">
+                        {% else %}
                         <h3>Upload Image</h3>
                         <p>
                             Image size must be less than <span>2MB</span>
                         </p>
-                    {% endif %}
-                </div>
-                <div>
-                		<button type="button">Select Image</button>
-                		<div>
-                  			<form id="subf" class="form-inline" action="/" method="post" enctype="multipart/form-data">
-                        		<input name="filename" type="file" id="file" accept="image/*" hidden>
-                        		<button type="submit">Predict</button>
-                    		</form>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <form id="subf" class="form-inline" action="/" method="post"
+                            enctype="multipart/form-data">
+                            <input name="filename" type="file" id="file" accept="image/*" hidden>
+                            <button type="submit" class="btn btn-primary mt-2">Predict</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -161,9 +166,10 @@
 
         <!-- After image uploaded -->
         {% if readImg %}
-            <div class="mt-3">
-                <h3>Diagnosis is : {{diseases}}</h3>
-                <br>
+        <div class="mt-3">
+            <h3>Diagnosis is : {{diseases}}</h3>
+            <br>
+            <div class="table-responsive">
                 <table id="probabilitiesTable" class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -191,6 +197,7 @@
                     </tbody>
                 </table>
             </div>
+        </div>
         {% endif %}
 
     </div>
@@ -199,8 +206,9 @@
     <script>
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
-        const selectImageBtn = document.querySelector('.select-image');
         const fileInput = document.getElementById('file');
+        const imgArea = document.querySelector('.img-area'); // Select the div with class 'img-area'
+
 
         // Function to set the theme based on localStorage
         function setTheme() {
@@ -229,8 +237,16 @@
             }
         });
 
-        selectImageBtn.addEventListener('click', () => {
-            fileInput.click();
+        fileInput.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function () {
+                    const result = reader.result;
+                    imgArea.innerHTML = `<img src="${result}" alt="Uploaded Image" class="img-fluid">`;
+                }
+                reader.readAsDataURL(file);
+            }
         });
     </script>
 </body>
