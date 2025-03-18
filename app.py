@@ -15,7 +15,7 @@ app = Flask(__name__)
 model = load_model('model/final_model.h5')
 
 # Define the path to store uploaded images
-target_img = os.path.join(os.getcwd(), 'static/images')
+target_img = os.path.join(os.getcwd(), 'static/uploaded-images')
 
 # Define allowed file extensions for uploaded images (png, jpg, jpeg)
 ALLOWED_EXT = set(['jpg', 'jpeg', 'png'])
@@ -56,7 +56,7 @@ def predict():
         # Check if the file is valid (extension is allowed)
         if file and allowed_file(file.filename):
             filename = file.filename  # Get the filename
-            file_path = os.path.join('static/images', filename)  # Set the path to save the file
+            file_path = os.path.join('static/uploaded-images', filename)  # Set the path to save the file
             
             # Save the file to the server
             file.save(file_path)
@@ -70,7 +70,7 @@ def predict():
             
             # Run the image through the model to get the prediction
             prediction = model(input_arr)
-            print(prediction)
+
             # Get the predicted class (the index of the class with the highest probability)
             classes_x = np.argmax(prediction, axis=1)
             

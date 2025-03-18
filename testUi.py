@@ -11,13 +11,13 @@ def allowed_file(filename):
 @app.route('/', methods=['GET', 'POST'])
 def predict():
     if request.method == 'GET':
-        return render_template('index3.html', readImg='0')
+        return render_template('index.html', readImg='0')
     
     if request.method == 'POST':
         file = request.files['filename']
         if file and allowed_file(file.filename):
             filename = file.filename  # Get the filename
-            file_path = os.path.join('static/images', filename)  # Set the path to save the file
+            file_path = os.path.join('static/uploaded-images', filename)  # Set the path to save the file
             file.save(file_path)
             pred = [.7,.4,.1,.02]
             labs = ['Cataract', 'Glaucoma', 'Dia_Ret', 'Normal']

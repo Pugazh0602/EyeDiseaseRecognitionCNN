@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eye Diseases Prediction</title>
     <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="/static/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/static/boxicons/2.1.4/css/boxicons.min.css">
     <script src="/static/js/table.js"></script>
     <style>
         /* Dark Mode Styles */
@@ -118,7 +118,7 @@
             <a class="navbar-brand" href="#">
                 <img src="/static/img/eye.gif" alt="Logo" width="50" height="40"
                     class="d-inline-block align-text-top">
-                EYE Disease <span class="">Recognition</span>
+                EYE Disease<span>Recognition</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -164,12 +164,12 @@
                         Image size must be less than <span>2MB</span>
                     </p>
                 </div>
-                <button type="button" class="btn btn-primary select-image">Select Image</button>
+                <button class="btn btn-primary select-image">Select Image</button>
                 <center>
                     <form id="subf" class="form-inline" action="/" method="post" enctype="multipart/form-data">
                         <input name="filename" type="file" id="file" accept="image/*" hidden>
-                        <button type="submit" class="btn btn-success select-image">
-                             Predict
+                        <button class="btn btn-success select-image">
+                            <input type="submit" class="btn btn-success " value="Predict" hidden>Predict
                         </button>
                     </form>
                 </center>
@@ -216,8 +216,6 @@
     <script>
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
-        const selectImageBtn = document.querySelector('.select-image');
-        const fileInput = document.getElementById('file');
 
         // Function to set the theme based on localStorage
         function setTheme() {
@@ -244,10 +242,6 @@
                 themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
                 localStorage.setItem('theme', 'dark');
             }
-        });
-
-        selectImageBtn.addEventListener('click', () => {
-            fileInput.click();
         });
     </script>
 </body>

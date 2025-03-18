@@ -42,18 +42,20 @@ The `final_model.h5` file contains the pre-trained model. The architecture is su
 
 2.  **Create a virtual environment (recommended):**
 
-    ```bash
+    ```
     python -m venv venv
+    ```
+    ```bash
     source venv/bin/activate  # On Linux/macO
     ```
     or
-    ```bash
+    ```bat
     venv\Scripts\activate.bat # On Windows
     ```
 
 3.  **Install the dependencies:**
 
-    ```bash
+    ```
     pip install -r requirements.txt
     ```
 
@@ -61,7 +63,7 @@ The `final_model.h5` file contains the pre-trained model. The architecture is su
 
 1.  **Run the Flask application:**
 
-    ```bash
+    ```
     python app.py
     #or
     python testUi.py #for testing ui
