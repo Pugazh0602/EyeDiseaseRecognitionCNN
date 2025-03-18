@@ -1,6 +1,6 @@
 function sortTable(columnIndex) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-    table = document.getElementById("probabilitiesTable");
+    table = document.getElementById("probabilities-table");
     switching = true;
     dir = "asc"; // Set the sorting direction to ascending
   

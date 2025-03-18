@@ -1,218 +1,152 @@
-@font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLDz8V1s.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/poppins/v22/pxiEyp8kv8JHgFVrFJA.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLGT9V1s.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLEj6V1s.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLCz7V1s.ttf) format('truetype');
+/* /static/css/styles.css */
+
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
 }
 
-*{
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
+h1,
+h2,
+h3 {
+    color: #0056b3;
+    margin-bottom: 0.75rem;
 }
 
-html{
-	display: relative;
+p {
+    margin-bottom: 1rem;
 }
 
-.hero{
-    position: relative;
-    width: 100%;
-    background: black;
-    position: relative;
+a {
+    color: #007bff;
+    text-decoration: none;
 }
 
-nav{
-    display: flex;
-    width: 84%;
-    margin: auto;
-    padding: 20px 0;
-    align-items: center;
-    justify-content: space-between;
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
 }
 
-.logo{
-    width: 100px;
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #222;
+    color: #eee;
+}
+
+body.dark-mode .navbar {
+    background-color: #343a40;
+}
+
+body.dark-mode .navbar-brand,
+body.dark-mode .nav-link {
+    color: #fff;
+}
+
+body.dark-mode #probabilities-table th {
+    background-color: #444;
+    color: #fff;
+}
+
+body.dark-mode #probabilities-table td {
+    color: #ddd;
+}
+
+/* Navbar Styles */
+.navbar {
+    padding: 0.75rem 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.navbar-brand img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.navbar-nav .nav-link {
+    padding: 0.5rem 1rem;
+}
+
+/* Intro Section */
+#intro {
+    padding: 2rem 0;
+    text-align: center;
+}
+
+/* Image Upload Section */
+#image-upload {
+    padding: 2rem 0;
+}
+
+.image-upload-container {
+    text-align: center;
+}
+
+.img-area {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
     cursor: pointer;
 }
 
-.detel{
-    margin-left: 8%;
-    margin-top: 5%;
+.img-area i {
+    font-size: 3em;
+    color: #ccc;
 }
 
-.detel h1{
-    font-size: 50px;
-    color: #5f5858;
-    margin-bottom: 20px;
-}
-
-span{
-    color: orange;
-    
-}
-
-.detel p{
-    color: #777777;
-    line-height: 28px;
-    margin-right: 200px;
-}
-
-.detel a{
-    background: #6c6c6c;
-    padding: 20px 50px;
-    text-decoration: none;
-    font-weight: bold;
-    color: #fff;
-    display: inline-block;
-    margin: 30px 0;
-    border-radius: 5px;
-}
-.detel a:hover{
-    background: #fff;
-    color: black;
-}
-
-.images{
-    width: 45%;
-    height: 80%;
-    position: absolute;
-    bottom: 0;
-    right: 100px;
-}
-
-.images img{
-    height: 100%;
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-	display: flex;
-    transform: translateX(-50%);
-    transition: bottom 1s, left 1s;
-}
-
-
-:root {
-	--blue: #0071FF;
-	--light-blue: #B6DBF6;
-	--dark-blue: #005DD1;
-	--grey: #f2f2f2;
-}
-
-body {
-	display: flex;
-	justify-content: center;
-	background: var(--light-blue);
-	flex-direction: column;
-}
-
-
-.container {
-	max-width: 300px;
-	width: 100%;
-	height: 75%;
-	background: #fff;
-	padding: 35px;
-	border-radius: 30px;
-}
-.img-area {
-	position: relative;
-	width: 100%;
-	height: 300px;
-	background: var(--grey);
-	margin-bottom: 30px;
-	border-radius: 15px;
-	overflow: hidden;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-}
-.img-area .icon {
-	font-size: 100px;
-}
 .img-area h3 {
-	font-size: 20px;
-	font-weight: 500;
-	margin-bottom: 6px;
+    margin-top: 10px;
 }
-.img-area p {
-	color: #999;
-}
-.img-area p span {
-	font-weight: 600;
-}
-.img-area img {
-	position: absolute;
-	top: 0;
-	object-fit: cover;
-	left: 100;
-	width: 100%;
-	height: 100%;
-	z-index: 100;
-}
-.img-area::before {
-	content: attr(data-img);
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, .5);
-	color: #fff;
-	font-weight: 500;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	pointer-events: none;
-	opacity: 0;
 
+.img-area img {
+    max-width: 100%;
+    height: auto;
 }
-.img-area.active:hover::before {
-	opacity: 1;
+
+#upload-form {
+    margin-top: 1rem;
 }
-.select-image {
-	width: 100%;
-	padding: 16px 0;
-	border-radius: 15px;
-	background: var(--blue);
-	color: #fff;
-	font-weight: 500;
-	font-size: 16px;
-	border: none;
-	cursor: pointer;
-	transition: all .3s ease;
+
+/* Diagnosis Results Section */
+#diagnosis-results {
+    padding: 2rem 0;
 }
-.select-image:hover {
-	background: var(--dark-blue);
+
+#probabilities-table {
+    width: 100%;
+}
+
+#probabilities-table th,
+#probabilities-table td {
+    text-align: left;
+}
+
+#probabilities-table th:hover {
+    cursor: pointer;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #f8f9fa;
+    padding: 1rem 0;
+    color: #6c757d;
+}
+
+/* Utility Classes */
+.text-primary {
+    color: #007bff !important;
+}
+
+.mt-4 {
+    margin-top: 2.5rem !important;
+}
+
+.mt-5 {
+    margin-top: 3rem !important;
 }
