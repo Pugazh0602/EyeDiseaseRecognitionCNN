@@ -23,7 +23,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <img src="/static/img/eye.gif" alt="Logo" height="40" class="d-inline-block align-top">
+                <img src="/static/img/eye.gif" alt="Logo" height="50" class="d-inline-block align-top">
                 EYE Disease <span class="text-primary">Recognition</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -41,9 +41,9 @@
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="#" id="theme-toggle" class="nav-link" aria-label="Toggle Theme">
+                        <div id="theme-toggle" class="nav-link" aria-label="Toggle Theme">
                             <i class="bi bi-sun-fill"></i>
-                        </a>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -123,11 +123,13 @@
                 <h1>Institution</h1>
                 <p>Srinivasa Subbaraya Government Polytechnic College, Puthur</p>
             </div>
+            
             <div>
-                <div>
-                    <h1>Project Guide</h1>
-                    <span>Dr.R.Sathya,M.E.,Ph.D</span>
-                </div>
+                <h1>Project Guide</h1>
+                <p>Dr.R.Sathya,M.E.,Ph.D</p>
+            </div>
+            
+            <div>
                 <h1>Submitted by</h1>
                 <ol>
                     <li>Pugazhandhi R</li>
@@ -177,7 +179,7 @@
 
         // Event listener for theme toggle
         themeToggle.addEventListener('click', (e) => {
-            e.preventDefault();
+            //e.preventDefault();
             if (body.classList.contains('dark-mode')) {
                 setTheme('light');
                 localStorage.setItem('theme', 'light'); // Save theme to localStorage
