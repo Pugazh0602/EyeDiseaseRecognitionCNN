@@ -1,17 +1,30 @@
 /* /static/css/styles.css */
 
+/* CSS Variables for Theming */
+:root {
+    --primary-color: #007bff;
+    --primary-darker: #0056b3;
+    --text-color: #333;
+    --bg-color: #f8f9fa;
+    --dark-bg-color: #222;
+    --dark-text-color: #eee;
+    --navbar-bg-color: #f8f9fa;
+    --dark-navbar-bg-color: #343a40;
+    --table-header-bg: #fff;
+    --dark-table-header-bg: #444;
+}
+
 /* General Styles */
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #f8f9fa;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for theme changes */
 }
 
-h1,
-h2,
-h3 {
-    color: #0056b3;
+h1, h2, h3 {
+    color: var(--primary-darker);
     margin-bottom: 0.75rem;
 }
 
@@ -20,33 +33,35 @@ p {
 }
 
 a {
-    color: #007bff;
+    color: var(--primary-color);
     text-decoration: none;
 }
 
 a:hover {
-    color: #0056b3;
+    color: var(--primary-darker);
     text-decoration: underline;
 }
 
 /* Dark Mode Styles */
 body.dark-mode {
-    background-color: #222;
-    color: #eee;
+    --text-color: var(--dark-text-color);
+    --bg-color: var(--dark-bg-color);
+    --navbar-bg-color: var(--dark-navbar-bg-color);
+    --table-header-bg: var(--dark-table-header-bg);
 }
 
 body.dark-mode .navbar {
-    background-color: #343a40;
+    background-color: var(--dark-navbar-bg-color);
 }
 
 body.dark-mode .navbar-brand,
 body.dark-mode .nav-link {
-    color: #fff;
+    color: var(--dark-text-color);
 }
 
 body.dark-mode #probabilities-table th {
-    background-color: #444;
-    color: #fff;
+    background-color: var(--dark-table-header-bg);
+    color: var(--dark-text-color);
 }
 
 body.dark-mode #probabilities-table td {
@@ -55,8 +70,10 @@ body.dark-mode #probabilities-table td {
 
 /* Navbar Styles */
 .navbar {
+    background-color: var(--navbar-bg-color);
     padding: 0.75rem 1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    transition: background-color 0.3s;
 }
 
 .navbar-brand {
@@ -120,27 +137,62 @@ body.dark-mode #probabilities-table td {
 
 #probabilities-table {
     width: 100%;
+    border-collapse: collapse; /* Important for consistent borders */
 }
 
 #probabilities-table th,
 #probabilities-table td {
     text-align: left;
+    padding: 0.5rem;
+    border: 1px solid #dee2e6; /* Add borders for clarity */
+}
+
+#probabilities-table th {
+    background-color: var(--table-header-bg);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 #probabilities-table th:hover {
     cursor: pointer;
+    background-color: #e9ecef;
 }
 
 /* Footer Styles */
 footer {
-    background-color: #f8f9fa;
+    background-color: var(--bg-color);
     padding: 1rem 0;
     color: #6c757d;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* About Section */
+#about {
+    margin-top: 3rem;
+    padding: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#about h1 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+}
+
+#about p {
+    font-size: 1.1rem;
+}
+
+#about ol {
+    padding-left: 1.5rem;
+}
+
+#about li {
+    margin-bottom: 0.5rem;
 }
 
 /* Utility Classes */
 .text-primary {
-    color: #007bff !important;
+    color: var(--primary-color) !important;
 }
 
 .mt-4 {
@@ -149,4 +201,27 @@ footer {
 
 .mt-5 {
     margin-top: 3rem !important;
+}
+
+/* Responsive Design (Basic) */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .navbar-brand img {
+        height: 30px;
+    }
+
+    #intro {
+        padding: 1.5rem 0;
+    }
+
+    #image-upload {
+        padding: 1.5rem 0;
+    }
+
+    #diagnosis-results {
+        padding: 1.5rem 0;
+    }
 }

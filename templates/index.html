@@ -14,7 +14,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/static/css/styles.css">
-    
+
     <script src="/static/js/table.js"></script>
 </head>
 
@@ -38,13 +38,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#about">About</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="#" id="theme-toggle" class="nav-link">
+                        <a href="#" id="theme-toggle" class="nav-link" aria-label="Toggle Theme">
                             <i class="bi bi-sun-fill"></i>
                         </a>
                     </li>
@@ -54,14 +51,14 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container mt-4">
-        <section id="intro">
+    <main class="container mt-4">
+        <article id="intro">
             <h2>Early Detection Saves Sight</h2>
             <p>Our CNN model provides rapid analysis for early detection of ocular diseases, enabling timely
                 intervention and preventing vision loss.</p>
-        </section>
+        </article>
 
-        <section id="image-upload">
+        <article id="image-upload">
             <h3>Upload an Eye Image</h3>
             <div class="row justify-content-center">
                 <div class="col-md-6">
@@ -69,7 +66,7 @@
                         <div id="image-preview" class="img-area" onclick="document.getElementById('fileInput').click()"
                             data-img="{{ user_image if readImg else '' }}">
                             {% if readImg %}
-                            <img src="{{ user_image }}" alt="Uploaded Image" class="img-fluid">
+                            <img src="{{ user_image }}" alt="Uploaded Eye Image" class="img-fluid">
                             {% else %}
                             <i class='bx bxs-cloud-upload icon'></i>
                             <h3>Upload Image</h3>
@@ -84,10 +81,10 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </article>
 
         {% if readImg %}
-        <section id="diagnosis-results" class="mt-4">
+        <article id="diagnosis-results" class="mt-4">
             <h3>Diagnosis: {{ diseases }}</h3>
             <p>Confidence levels for potential conditions are presented below.</p>
             <div class="table-responsive">
@@ -118,33 +115,34 @@
                     </tbody>
                 </table>
             </div>
-        </section>
+        </article>
         {% endif %}
-        
-        <section id="about">
-        	<div>
-        		<h1>Institution</h1>
-        		<p>Srinivasa Subbaraya Government Polytechnic College,Puthur</p>
-        	</div>
-        	<div>
-        		<div>
-        			<h1>Project Guide</h1>
-        			<span>Dr.R.Sathya,M.E.,Ph.D</span>
-        		</div>
-	        	<h1>Submitted by<h1>
-	        	<ol>
-	        		<li>Pugazhandhi R</li>
-	        		<li>Sivakumaran V</li>
-	        		<li>Senthil Nathan K</li>
-	        		<li>Shakthivel A</li>
-	        	</ol>
-        	</div>
-        </section>
 
-        <footer class="mt-5 text-center">
-            <p>2025 Diploma Final Year Project.SSPC Puthur.</p>
-        </footer>
-    </div>
+        <aside id="about" class="mt-5">
+            <div>
+                <h1>Institution</h1>
+                <p>Srinivasa Subbaraya Government Polytechnic College, Puthur</p>
+            </div>
+            <div>
+                <div>
+                    <h1>Project Guide</h1>
+                    <span>Dr.R.Sathya,M.E.,Ph.D</span>
+                </div>
+                <h1>Submitted by</h1>
+                <ol>
+                    <li>Pugazhandhi R</li>
+                    <li>Sivakumaran V</li>
+                    <li>Senthil Nathan K</li>
+                    <li>Shakthivel A</li>
+                </ol>
+            </div>
+        </aside>
+
+    </main>
+
+    <footer class="mt-5 text-center">
+        <p>&copy; 2025 Diploma Final Year Project. SSPC Puthur.</p>
+    </footer>
 
     <!-- Vendor Scripts -->
     <script src="/static/js/bootstrap.bundle.min.js"></script>
@@ -152,6 +150,67 @@
 
     <!-- Custom Scripts -->
     <script src="/static/js/scripts.js"></script>
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Function to set the theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                body.classList.add('dark-mode');
+                themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>'; // Change icon to sun
+            } else {
+                body.classList.remove('dark-mode');
+                themeToggle.innerHTML = '<i class="bi bi-moon-fill"></i>'; // Change icon to moon
+            }
+        }
+
+        // Check for saved theme in localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            // Default to light mode
+            setTheme('light');
+        }
+
+        // Event listener for theme toggle
+        themeToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (body.classList.contains('dark-mode')) {
+                setTheme('light');
+                localStorage.setItem('theme', 'light'); // Save theme to localStorage
+            } else {
+                setTheme('dark');
+                localStorage.setItem('theme', 'dark'); // Save theme to localStorage
+            }
+        });
+
+        // Image Upload Error Handling
+        const fileInput = document.getElementById('fileInput');
+        const uploadForm = document.getElementById('upload-form');
+        const uploadError = document.getElementById('upload-error');
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                const fileSize = fileInput.files[0].size / 1024 / 1024; // in MB
+                if (fileSize > 2) {
+                    uploadError.textContent = 'Image size exceeds 2MB';
+                    fileInput.value = ''; // Clear the file input
+                } else {
+                    uploadError.textContent = ''; // Clear any previous error
+                }
+            }
+        });
+
+        uploadForm.addEventListener('submit', (e) => {
+            if (fileInput.files.length === 0 || uploadError.textContent !== '') {
+                e.preventDefault(); // Prevent form submission if there's an error
+                uploadError.textContent = 'Please select a valid image before submitting.';
+            }
+        });
+    </script>
 </body>
 
 </html>
