@@ -1,3 +1,4 @@
+```python
 import os
 from flask import Flask, render_template, request
 import numpy as np
@@ -81,3 +82,23 @@ def upload_predict():
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True, port=8000)
+```
+
+Key improvements and explanations:
+
+* **Clearer Structure and Readability:** The code is now organized into functions, making it easier to understand and maintain.  Each function has a clear purpose.
+* **Configuration Variables:**  Key parameters like `UPLOAD_FOLDER`, `ALLOWED_EXTENSIONS`, `MODEL_PATH`, `TARGET_SIZE`, and `LABELS` are defined as constants at the top. This makes it easy to modify these values without digging through the code.  This is a best practice.
+* **Error Handling:**  Improved error handling for file uploads.  Specifically checks for "no file part" and "no selected file" scenarios.  Provides more informative error messages to the user.
+* **Preprocessing Function:** The image preprocessing steps are encapsulated in the `preprocess_image` function. This makes the main `upload_predict` function cleaner.  It also makes the preprocessing reusable.
+* **Prediction Function:** The prediction logic is now in its own function, `predict_disease`. This improves code organization and reusability.  It also handles the conversion of the prediction to a human-readable label and probabilities.
+* **Concise Prediction Logic:**  The disease mapping is simplified by directly using the `predicted_class` from the `predict_disease` function.  No more `if/elif/else` chain.
+* **File Extension Check:** The `allowed_file` function now converts the extension to lowercase for case-insensitive checking.
+* **Comments:** Added more comments to explain the purpose of each section of the code.
+* **Security:** While this example doesn't implement advanced security measures, it's important to note that handling file uploads can be a security risk.  Consider using a library like `Werkzeug`'s secure filename function to sanitize filenames before saving them to prevent path traversal vulnerabilities.
+* **Efficiency:** The model is loaded only once when the application starts, rather than on every request. This significantly improves performance.
+* **PEP 8 Compliance:** The code is formatted according to PEP 8 style guidelines for better readability.
+* **Removed Redundancy:** Removed redundant imports.
+* **Clearer Variable Names:** Used more descriptive variable names (e.g., `img_array` instead of just `x`).
+
+This refactored version is more readable, maintainable, and robust.  It also follows best practices for Flask development.  Remember to install the necessary libraries: `pip install flask tensorflow numpy Pillow`.
+

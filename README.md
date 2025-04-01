@@ -4,7 +4,7 @@ This project implements a web application for automated ocular disease recogniti
 
 ## Project Description
 
-The `app.py` file contains the Flask application that serves as the backend for the web application.  It utilizes a pre-trained Keras model (`final_model.h5`) to predict ocular diseases. The `templates` directory contains the HTML files (`index.html`, `index2.html`) that define the user interface.  The `static` directory contains CSS, JavaScript, and image files to style and enhance the web application.
+The `app.py` file contains the Flask application that serves as the backend for the web application.  It utilizes a pre-trained Keras model (`final_model.h5`) to predict ocular diseases. The `templates` directory contains the HTML files (`index.html`) that define the user interface.  The `static` directory contains CSS, JavaScript, and image files to style and enhance the web application.
 
 The application workflow is as follows:
 
@@ -28,7 +28,7 @@ The `final_model.h5` file contains the pre-trained model. The architecture is su
 
 ## Requirements
 
-*   Python 3.6+
+*   Python 3.11
 *   The libraries listed in `requirements.txt`.
 
 ## Installation
