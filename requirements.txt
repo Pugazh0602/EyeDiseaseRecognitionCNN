@@ -1,5 +1,4 @@
 Flask
-numpy
-pandas
 Pillow
-tensorflow==1.12.0
+tensorflow==2.12.0
+pandas

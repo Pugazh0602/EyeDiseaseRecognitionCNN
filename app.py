@@ -49,7 +49,7 @@ def predict_disease(model, img_array, labels):
 def upload_predict():
     """Handles image upload and prediction."""
     if request.method == 'GET':
-        return render_template('index.html', readImg='0')
+        return render_template('index.html', readImg=False)
 
     if 'filename' not in request.files:
         return "No file part"
@@ -69,7 +69,7 @@ def upload_predict():
 
         return render_template(
             'index.html',
-            readImg='1',
+            readImg=True,
             diseases=disease,
             prob=probabilities,
             user_image=filepath,
