@@ -35,7 +35,7 @@ The `final_model.h5` file contains the pre-trained model. The architecture is su
 
 1.  **Clone the repository:**
 
-    ```bash
+    ```
     git clone https://github.com/Pugazh0602/EyeDiseaseRecognitionCNN.git
     cd EyeDiseaseRecognitionCNN
     ```
@@ -62,11 +62,13 @@ The `final_model.h5` file contains the pre-trained model. The architecture is su
 ## Usage
 
 1.  **Run the Flask application:**
-
+	to run
     ```
     python app.py
-    #or
-    python testUi.py #for testing ui
+    ```
+    or to test the ui(does not require tensorflow)
+    ```
+    python testUi.py
     ```
 
 2.  **Open the application in your web browser:**

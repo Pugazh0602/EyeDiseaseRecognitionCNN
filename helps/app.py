@@ -98,12 +98,14 @@ def predict():
                 diseases = "Normal"
             
             # Render the results page with the image, predicted disease, and prediction probabilities
-            return render_template('index.html', 
-                                   readImg='1', 
-                                   diseases=diseases, 
-                                   prob=pred, 
-                                   user_image=file_path, 
-                                   label=labs)
+            return render_template(
+               'index.html', 
+               readImg='1', 
+               diseases=diseases, 
+               prob=pred, 
+               user_image=file_path, 
+               label=labs
+            )
         else:
             # Return an error message if the file is not valid
             return "Unable to read the file. Please check file extension"

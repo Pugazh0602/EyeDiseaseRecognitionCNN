@@ -20,11 +20,9 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Load the model (done only once at startup)
 model = load_model(MODEL_PATH)
 
-
 def allowed_file(filename):
     """Check if the filename has an allowed extension."""
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
 
 def preprocess_image(img_path, target_size):
     """Load, resize, and preprocess the image for the model."""
@@ -34,7 +32,6 @@ def preprocess_image(img_path, target_size):
     img_array = preprocess_input(img_array)  # VGG16 preprocessing
     return img_array
 
-
 def predict_disease(model, img_array, labels):
     """Predict the disease from the image array and return the result."""
     prediction = model.predict(img_array)
@@ -43,7 +40,6 @@ def predict_disease(model, img_array, labels):
     probabilities = prediction.flatten()
     probabilities = np.around(probabilities * 100, 2)  # Convert to percentage and round
     return predicted_class, probabilities
-
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_predict():
@@ -77,7 +73,6 @@ def upload_predict():
         )
     else:
         return "Invalid file type. Allowed types are: jpg, jpeg, png"
-
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True, port=8000)

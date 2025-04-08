@@ -22,7 +22,6 @@ def main():
     train_data, val_data, test_data = data_preprocessing.preprocess_data(data, augmentation=True)
     test_set = data_preprocessing.prepare_test_set(test_data)
 
-
     # 3. Define the model
     print("Creating model...")
     model = model_definition.create_model()
@@ -36,7 +35,6 @@ def main():
     class_names = data.class_names
     model_evaluation.evaluate_model(model, test_set, class_names)
     model_evaluation.plot_training_history(history)
-
 
 if __name__ == "__main__":
     main()

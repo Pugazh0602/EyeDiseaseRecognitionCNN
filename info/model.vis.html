@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Neural Network Visualization</title>
+    <!-- Load Vis.js -->
+    <script src="./visjs.github.io/vis-network/standalone/umd/vis-network.min.js"></script>
+    <style>
+        #network {
+            width: 100%;
+            height: 600px;
+            border: 1px solid lightgray;
+        }
+    </style>
+</head>
+<body>
+    <div id="network"></div>
+
+ snips
+
+    <script>
+        // Define the network structure based on your model summary
+        const nodes = [
+            { id: 1, label: "Input" }, // Input shape not specified, keeping it generic
+            { id: 2, label: "DenseNet121\n(None, 7, 7, 1024)" },
+            { id: 3, label: "MaxPooling2D\n(None, 3, 3, 1024)" },
+            { id: 4, label: "BatchNormalization\n(None, 3, 3, 1024)" },
+            { id: 5, label: "Dropout\n(None, 3, 3, 1024)" },
+            { id: 6, label: "Flatten\n(None, 9216)" },
+            { id: 7, label: "Dense\n(None, 512)" },
+            { id: 8, label: "Dropout\n(None, 512)" },
+            { id: 9, label: "Dense\n(None, 4)" }
+        ];
+
+        const edges = [
+            { from: 1, to: 2 },
+            { from: 2, to: 3 },
+            { from: 3, to: 4 },
+            { from: 4, to: 5 },
+            { from: 5, to: 6 },
+            { from: 6, to: 7 },
+            { from: 7, to: 8 },
+            { from: 8, to: 9 }
+        ];
+
+        // Create a network
+        const container = document.getElementById('network');
+        const data = { nodes: new vis.DataSet(nodes), edges: new vis.DataSet(edges) };
+        const options = {
+            layout: { hierarchical: { direction: "UD" } }, // Top-down layout
+            nodes: { 
+                shape: 'box', 
+                font: { multi: true, size: 12 }, 
+                widthConstraint: { maximum: 150 }
+            },
+            edges: { arrows: 'to' }
+        };
+        const network = new vis.Network(container, data, options);
+    </script>
+</body>
+</html>
