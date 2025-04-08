@@ -1,199 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Eye Disease Recognition</title>
-
-	<!-- Vendor CSS -->
-	<!-- <link rel="stylesheet" href="/static/css/pico.min.css"> -->
-	<link rel="stylesheet" href="/static/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/static/libs/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
-	<!-- Custom CSS -->
-	<link rel="stylesheet" href="/static/css/styles.css">
-	<style>
-		/* Optional: Smooth transition for manual theme switch */
-		html, [class]{
-		    transition: background-color 1.0s ease, color 0.3s ease;
-		}
-	</style>
-	<!-- For sortting table -->
-	<script src="/static/js/table.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eye Disease Recognition</title>
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/libs/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <style>
+    /* Optional: Smooth transition for manual theme switch */
+    html, [class]{
+      transition: background-color 1.0s ease, color 0.3s ease;
+    }
+  </style>
+  <script src="/static/js/table.js"></script>
 </head>
-
 <body>
-	<!-- Navigation -->
-    <nav class=" navbar-expand-lg">
-		<div class="container">
-            <a class="navbar-brand" href="/">
-				<img src="/static/img/eye.gif" alt="Logo" height="50" class="d-inline-block align-top">
-				EYE Disease <span class="text-primary">Recognition</span>
-			</a>
-            <button class="nav-item navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <div id="theme-toggle" class="nav-link" aria-label="Toggle Theme">
-                            <i class="bi bi-sun-fill"></i>
-                        </div>
-                    </li>
-                </ul>
+  <!-- Navigation -->
+  <nav class=" navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img src="/static/img/eye.gif" alt="Logo" height="50" class="d-inline-block align-top">
+        EYE Disease <span class="text-primary">Recognition</span>
+      </a>
+      <button class="nav-item navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <div id="theme-toggle" class="nav-link" aria-label="Toggle Theme">
+              <i class="bi bi-sun-fill"></i>
             </div>
-		</div>
-	</nav>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Main Content -->
+  <main class="container mt-4">
+    <article id="intro">
+      <h2>Early Detection Saves Sight</h2>
+      <p>Our CNN model provides rapid analysis for early detection of ocular diseases, enabling timely
+        intervention and preventing vision loss.</p>
+    </article>
+    <article id="image-upload">
+      <h3>Upload an Eye Image</h3>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="image-upload-container">
+            <div id="image-preview" class="img-area" onclick="document.getElementById('fileInput').click()" data-img="{{ user_image if readImg else '' }}">
+              {% if readImg %}
+              <img src="{{ user_image }}" alt="Uploaded Eye Image" class="img-fluid">
+              {% else %}
+              <i class='bx bxs-cloud-upload icon'></i>
+              <h3>Upload Image</h3>
+              <p>Image size must be less than 2MB</p>
+              {% endif %}
+            </div>
+            <form id="upload-form" action="/" method="post" enctype="multipart/form-data">
+              <input type="file" id="fileInput" name="filename" accept="image/*" hidden>
+              <button type="submit" class="btn btn-primary mt-2">Predict</button>
+              <div id="upload-error" class="text-danger mt-2"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </article>
+    {% if readImg %}
+    <article id="diagnosis-results" class="mt-4">
+      <h3>Diagnosis: {% if disease == "Normal" %}<span class="text-success-emphasis">{{ disease }}</span> {% else %} <span class="text-warning-emphasis"> {{ disease }} </span> {% endif %}</h3>
+      <p>Confidence levels for potential conditions are presented below.</p>
+      <div class="table-responsive">
+        <table id="probabilities-table" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th onclick="sortTable(0)">Ocular Disease</th>
+              <th onclick="sortTable(1)">Probability</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Glaucoma</td>
+              <td>{{ prob[2] }}%</td>
+            </tr>
+            <tr>
+              <td>Cataract</td>
+              <td>{{ prob[0] }}%</td>
+            </tr>
+            <tr>
+              <td>Normal</td>
+              <td>{{ prob[3] }}%</td>
+            </tr>
+            <tr>
+              <td>Diabetic Retinopathy</td>
+              <td>{{ prob[1] }}%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+    {% endif %}
+    <aside id="about" class="mt-5">
+      <div>
+        <h1>Institution</h1>
+        <p>Srinivasa Subbaraya Government Polytechnic College, Puthur</p>
+      </div>
+      <div>
+        <h1>Project Guide</h1>
+        <p>Dr.R.Sathya,M.E.,Ph.D</p>
+      </div>
+      <div>
+        <h1>Submitted by</h1>
+        <ol>
+          <li>Pugazhandhi R</li>
+          <li>Senthil Nathan K</li>
+          <li>Shakthivel A</li>
+          <li>Sivakumaran V</li>
+        </ol>
+      </div>
+    </aside>
+  </main>
+  <footer class="mt-5 text-center">
+    <p>&copy; 2025 Diploma Final Year Project. SSPC Puthur.</p>
+  </footer>
+  <script src="/static/js/jquery-3.6.0.min.js"></script>
+  <script src="/static/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        $('html').attr('data-theme', savedTheme);
+      }
+      $('#theme-toggle').click(()=>{
+        const currentTheme = $('html').attr('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        $('html').attr('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+      });
+    });
+    
+    const uploadForm = $('#upload-form');
+    const uploadError = $('#upload-error');
 
-	<!-- Main Content -->
-	<main class="container mt-4">
-		<article id="intro">
-			<h2>Early Detection Saves Sight</h2>
-			<p>Our CNN model provides rapid analysis for early detection of ocular diseases, enabling timely
-				intervention and preventing vision loss.</p>
-		</article>
+    $('#fileInput').change(() => {
+      if (fileInput.files.length > 0) {
+        const fileSize = fileInput.files[0].size / 1024 / 1024; // in MB
+        if (fileSize > 2) {
+          uploadError.textContent = 'Image size exceeds 2MB';
+          fileInput.value = ''; // Clear the file input
+        } else {
+          uploadError.textContent = ''; // Clear any previous error
+        }
+      }
+    });
 
-		<article id="image-upload">
-			<h3>Upload an Eye Image</h3>
-			<div class="row justify-content-center">
-				<div class="col-md-6">
-					<div class="image-upload-container">
-						<div id="image-preview" class="img-area" onclick="document.getElementById('fileInput').click()" data-img="{{ user_image if readImg else '' }}">
-							{% if readImg %}
-							<img src="{{ user_image }}" alt="Uploaded Eye Image" class="img-fluid">
-							{% else %}
-							<i class='bx bxs-cloud-upload icon'></i>
-							<h3>Upload Image</h3>
-							<p>Image size must be less than 2MB</p>
-							{% endif %}
-						</div>
-						<form id="upload-form" action="/" method="post" enctype="multipart/form-data">
-							<input type="file" id="fileInput" name="filename" accept="image/*" hidden>
-							<button type="submit" class="btn btn-primary mt-2">Predict</button>
-							<div id="upload-error" class="text-danger mt-2"></div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</article>
-
-		{% if readImg %}
-		<article id="diagnosis-results" class="mt-4">
-			<h3>Diagnosis: {% if disease == "Normal" %}<span class="text-success-emphasis">{{ disease }}</span> {% else %} <span class="text-warning-emphasis"> {{ disease }} </span> {% endif %}</h3>
-			<p>Confidence levels for potential conditions are presented below.</p>
-			<div class="table-responsive">
-				<table id="probabilities-table" class="table table-bordered table-striped">
-					<thead>
-						<tr>
-							<th onclick="sortTable(0)">Ocular Disease</th>
-							<th onclick="sortTable(1)">Probability</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Glaucoma</td>
-							<td>{{ prob[2] }}%</td>
-						</tr>
-						<tr>
-							<td>Cataract</td>
-							<td>{{ prob[0] }}%</td>
-						</tr>
-						<tr>
-							<td>Normal</td>
-							<td>{{ prob[3] }}%</td>
-						</tr>
-						<tr>
-							<td>Diabetic Retinopathy</td>
-							<td>{{ prob[1] }}%</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</article>
-		{% endif %}
-
-		<aside id="about" class="mt-5">
-			<div>
-				<h1>Institution</h1>
-				<p>Srinivasa Subbaraya Government Polytechnic College, Puthur</p>
-			</div>
-
-			<div>
-				<h1>Project Guide</h1>
-				<p>Dr.R.Sathya,M.E.,Ph.D</p>
-			</div>
-
-			<div>
-				<h1>Submitted by</h1>
-				<ol>
-					<li>Pugazhandhi R</li>
-					<li>Sivakumaran V</li>
-					<li>Senthil Nathan K</li>
-					<li>Shakthivel A</li>
-				</ol>
-			</div>
-		</aside>
-
-	</main>
-
-	<footer class="mt-5 text-center">
-		<p>&copy; 2025 Diploma Final Year Project. SSPC Puthur.</p>
-	</footer>
-
-	<!-- Vendor Scripts -->
-	<script src="/static/js/jquery-3.6.0.min.js"></script>
-	<script src="/static/js/bootstrap.bundle.min.js"></script>
-
-	<!-- Custom Scripts -->
-	<script>
-		$(document).ready(function(){
-		            const savedTheme = localStorage.getItem('theme');
-		            
-		        	if (savedTheme) {
-		                $('html').attr('data-theme', savedTheme);
-		            }
-		        	
-		   			$('#theme-toggle').click(()=>{
-		   				const currentTheme = $('html').attr('data-theme');
-		                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-		                
-		                $('html').attr('data-theme', newTheme);
-		                localStorage.setItem('theme', newTheme);
-		   			});
-		});
-		
-		        const uploadForm = $('#upload-form');
-		        const uploadError = $('#upload-error');
-		
-		        $('#fileInput').change(() => {
-		            if (fileInput.files.length > 0) {
-		                const fileSize = fileInput.files[0].size / 1024 / 1024; // in MB
-		                if (fileSize > 2) {
-		                    uploadError.textContent = 'Image size exceeds 2MB';
-		                    fileInput.value = ''; // Clear the file input
-		                } else {
-		                    uploadError.textContent = ''; // Clear any previous error
-		                }
-		            }
-		        });
-		
-		        uploadForm.submit((e) => {
-		            if (fileInput.files.length === 0 || uploadError.textContent !== '') {
-		                e.preventDefault(); // Prevent form submission if there's an error
-		                uploadError.textContent = 'Please select a valid image before submitting.';
-		            }
-		        });
-	</script>
+    uploadForm.submit((e) => {
+      if (fileInput.files.length === 0 || uploadError.textContent !== '') {
+        e.preventDefault(); // Prevent form submission if there's an error
+        uploadError.textContent = 'Please select a valid image before submitting.';
+      }
+    });
+  </script>
 </body>
-
 </html>
