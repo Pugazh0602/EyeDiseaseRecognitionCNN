@@ -83,8 +83,5 @@ The `final_model.h5` file contains the pre-trained model. The architecture is su
 
     The application will display the predicted disease and the probabilities for each disease class.
 
-## Thanks
-Thanks to [sanjays50](https://github.com/sanjays50)'s project [Eye-Disease-Classigication-and-Detection](https://github.com/sanjays50/Eye-Disease-Classigication-and-Detection) for a head start.
-
 ## License
 This project uses [LICENSE](LICENSE)
