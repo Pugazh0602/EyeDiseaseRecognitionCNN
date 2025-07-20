@@ -1,6 +1,8 @@
 /* /static/css/styles.css */
 
-/* CSS Variables for Theming */
+/* =====================
+   CSS Variables & Theme
+   ===================== */
 :root {
 	--primary-color: #0056b3;
 	--dark-primary-color: #007bff;
@@ -17,29 +19,42 @@
 
 	--table-header-bg: #fff;
 	--dark-table-header-bg: #444;
+
+	--success-color: #00ff00;
+	--danger-color: #ff0000;
 }
 
+/* =====================
+   Utility Classes
+   ===================== */
 .text-green {
-	color: #00ff00
+	color: var(--success-color) !important;
 }
-
 .text-red {
-	color: #ff0000
+	color: var(--danger-color) !important;
 }
-.text-red,.text-green{
+.text-primary {
+	color: var(--primary-color) !important;
+}
+.mt-4 {
+	margin-top: 2.5rem !important;
+}
+.mt-5 {
+	margin-top: 3rem !important;
 }
 
-/* General Styles */
+/* =====================
+   General Styles
+   ===================== */
 body {
 	font-family: 'Arial', sans-serif;
 	line-height: 1.6;
 	color: var(--text-color);
 	background-color: var(--bg-color);
 	transition: background-color 0.3s, color 0.3s;
-	/* Smooth transition for theme changes */
 }
 
-h1,h2,h3 {
+h1, h2, h3 {
 	color: var(--primary-darker);
 	margin-bottom: 0.75rem;
 }
@@ -52,39 +67,42 @@ a {
 	color: var(--primary-color);
 	text-decoration: none;
 }
-
 a:hover {
 	color: var(--primary-darker);
 	text-decoration: underline;
 }
 
-/* Dark Mode Styles */
-body.dark-mode {
+/* =====================
+   Dark Mode Styles
+   ===================== */
+[data-theme="dark"] {
 	--text-color: var(--dark-text-color);
 	--bg-color: var(--dark-bg-color);
 	--navbar-bg-color: var(--dark-navbar-bg-color);
 	--table-header-bg: var(--dark-table-header-bg);
 }
-
-body.dark-mode .navbar {
+[data-theme="dark"] body {
+	color: var(--dark-text-color);
+	background-color: var(--dark-bg-color);
+}
+[data-theme="dark"] nav {
 	background-color: var(--dark-navbar-bg-color);
 }
-
-body.dark-mode .navbar-brand,
-body.dark-mode .nav-link {
+[data-theme="dark"] .navbar-brand,
+[data-theme="dark"] .nav-link {
 	color: var(--dark-text-color);
 }
-
-body.dark-mode #probabilities-table th {
+[data-theme="dark"] #probabilities-table th {
 	background-color: var(--dark-table-header-bg);
 	color: var(--dark-text-color);
 }
-
-body.dark-mode #probabilities-table td {
+[data-theme="dark"] #probabilities-table td {
 	color: #ddd;
 }
 
-/* Navbar Styles */
+/* =====================
+   Navbar Styles
+   ===================== */
 nav {
 	background-color: var(--navbar-bg-color);
 	padding: 0.75rem 1rem;
@@ -106,13 +124,14 @@ nav {
 	padding: 0.5rem 1rem;
 }
 
-/* Intro Section */
+/* =====================
+   Section Styles
+   ===================== */
 #intro {
 	padding: 2rem 0;
 	text-align: center;
 }
 
-/* Image Upload Section */
 #image-upload {
 	padding: 2rem 0;
 }
@@ -146,7 +165,6 @@ nav {
 	margin-top: 1rem;
 }
 
-/* Diagnosis Results Section */
 #diagnosis-results {
 	padding: 2rem 0;
 }
@@ -154,7 +172,6 @@ nav {
 #probabilities-table {
 	width: 100%;
 	border-collapse: collapse;
-	/* Important for consistent borders */
 }
 
 #probabilities-table th,
@@ -162,7 +179,6 @@ nav {
 	text-align: left;
 	padding: 0.5rem;
 	border: 1px solid #dee2e6;
-	/* Add borders for clarity */
 }
 
 #probabilities-table th {
@@ -175,7 +191,9 @@ nav {
 	background-color: #e9ecef;
 }
 
-/* Footer Styles */
+/* =====================
+   Footer Styles
+   ===================== */
 footer {
 	background-color: var(--bg-color);
 	padding: 1rem 0;
@@ -183,7 +201,9 @@ footer {
 	transition: background-color 0.3s, color 0.3s;
 }
 
-/* About Section */
+/* =====================
+   About Section
+   ===================== */
 #about {
 	margin-top: 3rem;
 	padding: 2rem;
@@ -208,37 +228,22 @@ footer {
 	margin-bottom: 0.5rem;
 }
 
-/* Utility Classes */
-.text-primary {
-	color: var(--primary-color) !important;
-}
-
-.mt-4 {
-	margin-top: 2.5rem !important;
-}
-
-.mt-5 {
-	margin-top: 3rem !important;
-}
-
-/* Responsive Design (Basic) */
+/* =====================
+   Responsive Design
+   ===================== */
 @media (max-width: 768px) {
 	.navbar-brand {
 		font-size: 1.2rem;
 	}
-
 	.navbar-brand img {
 		height: 30px;
 	}
-
 	#intro {
 		padding: 1.5rem 0;
 	}
-
 	#image-upload {
 		padding: 1.5rem 0;
 	}
-
 	#diagnosis-results {
 		padding: 1.5rem 0;
 	}

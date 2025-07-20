@@ -28,18 +28,10 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#about">About</a>
-          </li>
-        </ul>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
             <div id="theme-toggle" class="nav-link" aria-label="Toggle Theme">
-              <i class="bi bi-sun-fill"></i>
+              <i id="theme-icon" class="bi bi-sun-fill" data-theme-icon></i>
             </div>
           </li>
         </ul>
@@ -69,7 +61,11 @@
             </div>
             <form id="upload-form" action="/" method="post" enctype="multipart/form-data">
               <input type="file" id="fileInput" name="filename" accept="image/*" hidden>
+              {% if readImg %}
+              <a class="btn btn-primary mt-2" href="/" >Predict Next</a>
+              {% else %}
               <button type="submit" class="btn btn-primary mt-2">Predict</button>
+              {% endif %}
               <div id="upload-error" class="text-danger mt-2"></div>
             </form>
           </div>
@@ -113,42 +109,6 @@
   </main>
   <script src="/static/libs/jquery/jquery-3.6.0.min.js"></script>
   <script src="/static/libs/bootstrap/bootstrap.bundle.min.js"></script>
-  <script>
-    $(document).ready(function(){
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) {
-        $('html').attr('data-theme', savedTheme);
-      }
-      $('#theme-toggle').click(()=>{
-        const currentTheme = $('html').attr('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
-        $('html').attr('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-      });
-    });
-    
-    const uploadForm = $('#upload-form');
-    const uploadError = $('#upload-error');
-
-    $('#fileInput').change(() => {
-      if (fileInput.files.length > 0) {
-        const fileSize = fileInput.files[0].size / 1024 / 1024; // in MB
-        if (fileSize > 2) {
-          uploadError.textContent = 'Image size exceeds 2MB';
-          fileInput.value = ''; // Clear the file input
-        } else {
-          uploadError.textContent = ''; // Clear any previous error
-        }
-      }
-    });
-
-    uploadForm.submit((e) => {
-      if (fileInput.files.length === 0 || uploadError.textContent !== '') {
-        e.preventDefault(); // Prevent form submission if there's an error
-        uploadError.textContent = 'Please select a valid image before submitting.';
-      }
-    });
-  </script>
+  <script src="/static/js/index.js"></script>
 </body>
 </html>
