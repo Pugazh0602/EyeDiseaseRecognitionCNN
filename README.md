@@ -49,12 +49,13 @@ The `final_model.h5` file contains the pre-trained model. The architecture is su
     ```bash
     source venv/bin/activate  
     ```
-    or # On Windows
+    or
+    # On Windows
     ```bat
     venv\Scripts\activate.bat 
     ```
 
-3.  **Install the dependencies:**
+4.  **Install the dependencies:**
 
     ```
     pip install -r requirements.txt
