@@ -45,12 +45,13 @@ The `final_model.h5` file contains the pre-trained model. The architecture is su
     ```
     python -m venv venv
     ```
+    # On Linux/macO
     ```bash
-    source venv/bin/activate  # On Linux/macO
+    source venv/bin/activate  
     ```
-    or
+    or # On Windows
     ```bat
-    venv\Scripts\activate.bat # On Windows
+    venv\Scripts\activate.bat 
     ```
 
 3.  **Install the dependencies:**
